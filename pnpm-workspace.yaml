@@ -1,0 +1,23 @@
+catalogs:
+  tiptap:
+    '@tiptap/core': &tiptap-version "3.27.1"
+    '@tiptap/extension-character-count': *tiptap-version
+    '@tiptap/extension-highlight': *tiptap-version
+    '@tiptap/extension-horizontal-rule': *tiptap-version
+    '@tiptap/extension-image': *tiptap-version
+    '@tiptap/extension-link': *tiptap-version
+    '@tiptap/extension-placeholder': *tiptap-version
+    '@tiptap/extension-subscript': *tiptap-version
+    '@tiptap/extension-superscript': *tiptap-version
+    '@tiptap/extension-table': *tiptap-version
+    '@tiptap/extension-table-cell': *tiptap-version
+    '@tiptap/extension-table-header': *tiptap-version
+    '@tiptap/extension-table-row': *tiptap-version
+    '@tiptap/extensions': *tiptap-version
+    '@tiptap/extension-text-align': *tiptap-version
+    '@tiptap/extension-typography': *tiptap-version
+    '@tiptap/extension-underline': *tiptap-version
+    '@tiptap/extension-list': *tiptap-version
+    '@tiptap/pm': *tiptap-version
+    '@tiptap/react': *tiptap-version
+    '@tiptap/starter-kit': *tiptap-version
