@@ -1,8 +1,6 @@
-x-tiptap-version: &tiptap-version "3.27.1"
-
 catalogs:
   tiptap:
-    '@tiptap/core': *tiptap-version
+    '@tiptap/core': &tiptap-version "3.27.1"
     '@tiptap/extension-character-count': *tiptap-version
     '@tiptap/extension-highlight': *tiptap-version
     '@tiptap/extension-horizontal-rule': *tiptap-version
@@ -15,9 +13,11 @@ catalogs:
     '@tiptap/extension-table-cell': *tiptap-version
     '@tiptap/extension-table-header': *tiptap-version
     '@tiptap/extension-table-row': *tiptap-version
+    '@tiptap/extensions': *tiptap-version
     '@tiptap/extension-text-align': *tiptap-version
     '@tiptap/extension-typography': *tiptap-version
     '@tiptap/extension-underline': *tiptap-version
+    '@tiptap/extension-list': *tiptap-version
     '@tiptap/pm': *tiptap-version
     '@tiptap/react': *tiptap-version
     '@tiptap/starter-kit': *tiptap-version

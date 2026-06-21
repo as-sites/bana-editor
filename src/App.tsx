@@ -8,8 +8,8 @@
  */
 
 import { useCallback, useRef, useState } from 'react'
-import { Editor } from '@/components/editor/Editor.tsx'
-import { MenuBar } from '@/components/editor/MenuBar.tsx'
+import { SimpleEditor } from '@/components/tiptap-templates/simple/simple-editor'
+import { MenuBar } from '@/components/editor/MenuBar'
 import { tiptapJsonToDocumentModel } from '@/lib/document-model/converter.ts'
 import { exportDocx } from '@/lib/docx/export.ts'
 import { importDocx, documentModelToTiptapJson } from '@/lib/docx/import.ts'
@@ -68,7 +68,7 @@ export function App() {
   }, [])
 
   return (
-    <div className="flex h-screen flex-col overflow-hidden bg-white">
+    <div className="flex h-screen flex-col overflow-hidden">
       <MenuBar
         onNew={handleNew}
         onImport={handleImport}
@@ -90,7 +90,7 @@ export function App() {
       )}
 
       <main className="min-h-0 flex-1">
-        <Editor
+        <SimpleEditor
           key={editorKey}
           onContentChange={handleContentChange}
           initialContent={pendingContentRef.current}

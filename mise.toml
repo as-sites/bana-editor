@@ -1,18 +1,18 @@
 [tools]
 node = "26"
-aube = "1.22.0"
+pnpm = "11.8.0"
 
 # this doesn't use the builtin aube provider because it doesn't allow overriding `sources`
 [deps.pnpm-custom]
 auto = true
 sources = [
   "package.json",
-  "aube-lock.yaml",
-  "aube-workspace.yaml",
+  "pnpm-lock.yaml",
+  "pnpm-workspace.yaml",
 ]
 outputs = ["node_modules/"]
-description = "Install dependencies with aube"
-run = 'aube install'
+description = "Install dependencies with pnpm"
+run = 'pnpm install'
 
 [hooks]
 postinstall = ['[ -n "$CI" ] || mise deps install']
@@ -25,7 +25,7 @@ mi = 'mise install '
 _.path = ['node_modules/.bin']
 
 [settings]
-npm.package_manager = "aube"
+npm.package_manager = "pnpm"
 
 [tasks.dev]
 description = "Start the dev server"
