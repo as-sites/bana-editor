@@ -11,11 +11,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
-import Underline from '@tiptap/extension-underline'
 import TextAlign from '@tiptap/extension-text-align'
 import Highlight from '@tiptap/extension-highlight'
 import Image from '@tiptap/extension-image'
-import Link from '@tiptap/extension-link'
 import Placeholder from '@tiptap/extension-placeholder'
 import CharacterCount from '@tiptap/extension-character-count'
 import Superscript from '@tiptap/extension-superscript'
@@ -43,20 +41,18 @@ export function Editor({ onContentChange, initialContent }: EditorProps) {
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
-        // Disable extensions that conflict with our custom setup
         heading: {
           levels: [1, 2, 3, 4, 5, 6],
         },
+        link: {
+          openOnClick: false,
+        },
       }),
-      Underline,
       TextAlign.configure({
         types: ['heading', 'paragraph'],
       }),
       Highlight.configure({ multicolor: true }),
       Image,
-      Link.configure({
-        openOnClick: false,
-      }),
       Placeholder.configure({
         placeholder: 'Start typing your document…',
       }),
@@ -124,7 +120,6 @@ export function Editor({ onContentChange, initialContent }: EditorProps) {
     if (!editor) return
     editor.chain().focus().insertContent({
       type: 'transcribersNote',
-      content: [{ type: 'text', text: '' }],
     }).run()
   }, [editor])
 

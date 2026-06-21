@@ -13,6 +13,30 @@
  * NOTE: All AI-related functionality has been intentionally excluded.
  */
 
+import {
+  AlignCenterIcon,
+  AlignLeftIcon,
+  AlignRightIcon,
+  BoldIcon,
+  BookOpenIcon,
+  Code2Icon,
+  Heading1Icon,
+  Heading2Icon,
+  Heading3Icon,
+  ItalicIcon,
+  ListIcon,
+  ListOrderedIcon,
+  MessageSquareTextIcon,
+  QuoteIcon,
+  Redo2Icon,
+  SeparatorHorizontalIcon,
+  StrikethroughIcon,
+  SubscriptIcon,
+  SuperscriptIcon,
+  UnderlineIcon,
+  Undo2Icon,
+} from 'lucide-react'
+
 import type { Editor } from '@tiptap/react'
 
 interface ToolbarButtonProps {
@@ -66,14 +90,14 @@ export function Toolbar({ editor, onInsertTranscribersNote, onInsertPrintPageInd
         disabled={!editor.can().undo()}
         title="Undo"
       >
-        ↩
+        <Undo2Icon size={16} />
       </ToolbarButton>
       <ToolbarButton
         onClick={() => editor.chain().focus().redo().run()}
         disabled={!editor.can().redo()}
         title="Redo"
       >
-        ↪
+        <Redo2Icon size={16} />
       </ToolbarButton>
 
       <Divider />
@@ -84,55 +108,59 @@ export function Toolbar({ editor, onInsertTranscribersNote, onInsertPrintPageInd
         active={editor.isActive('bold')}
         title="Bold"
       >
-        <strong>B</strong>
+        <BoldIcon size={16} />
       </ToolbarButton>
       <ToolbarButton
         onClick={() => editor.chain().focus().toggleItalic().run()}
         active={editor.isActive('italic')}
         title="Italic"
       >
-        <em>I</em>
+        <ItalicIcon size={16} />
       </ToolbarButton>
       <ToolbarButton
         onClick={() => editor.chain().focus().toggleUnderline().run()}
         active={editor.isActive('underline')}
         title="Underline"
       >
-        <span className="underline">U</span>
+        <UnderlineIcon size={16} />
       </ToolbarButton>
       <ToolbarButton
         onClick={() => editor.chain().focus().toggleStrike().run()}
         active={editor.isActive('strike')}
         title="Strikethrough"
       >
-        <span className="line-through">S</span>
+        <StrikethroughIcon size={16} />
       </ToolbarButton>
       <ToolbarButton
         onClick={() => editor.chain().focus().toggleSuperscript().run()}
         active={editor.isActive('superscript')}
         title="Superscript"
       >
-        x²
+        <SuperscriptIcon size={16} />
       </ToolbarButton>
       <ToolbarButton
         onClick={() => editor.chain().focus().toggleSubscript().run()}
         active={editor.isActive('subscript')}
         title="Subscript"
       >
-        x₂
+        <SubscriptIcon size={16} />
       </ToolbarButton>
 
       <Divider />
 
       {/* Headings */}
-      {([1, 2, 3] as const).map(level => (
+      {([
+        [1, Heading1Icon],
+        [2, Heading2Icon],
+        [3, Heading3Icon],
+      ] as const).map(([level, Icon]) => (
         <ToolbarButton
           key={level}
           onClick={() => editor.chain().focus().toggleHeading({ level }).run()}
           active={editor.isActive('heading', { level })}
           title={`Heading ${level}`}
         >
-          H{level}
+          <Icon size={16} />
         </ToolbarButton>
       ))}
 
@@ -144,14 +172,14 @@ export function Toolbar({ editor, onInsertTranscribersNote, onInsertPrintPageInd
         active={editor.isActive('bulletList')}
         title="Bullet list"
       >
-        •≡
+        <ListIcon size={16} />
       </ToolbarButton>
       <ToolbarButton
         onClick={() => editor.chain().focus().toggleOrderedList().run()}
         active={editor.isActive('orderedList')}
         title="Ordered list"
       >
-        1≡
+        <ListOrderedIcon size={16} />
       </ToolbarButton>
 
       <Divider />
@@ -162,21 +190,21 @@ export function Toolbar({ editor, onInsertTranscribersNote, onInsertPrintPageInd
         active={editor.isActive({ textAlign: 'left' })}
         title="Align left"
       >
-        ⬛⬜⬜
+        <AlignLeftIcon size={16} />
       </ToolbarButton>
       <ToolbarButton
         onClick={() => editor.chain().focus().setTextAlign('center').run()}
         active={editor.isActive({ textAlign: 'center' })}
         title="Align center"
       >
-        ⬜⬛⬜
+        <AlignCenterIcon size={16} />
       </ToolbarButton>
       <ToolbarButton
         onClick={() => editor.chain().focus().setTextAlign('right').run()}
         active={editor.isActive({ textAlign: 'right' })}
         title="Align right"
       >
-        ⬜⬜⬛
+        <AlignRightIcon size={16} />
       </ToolbarButton>
 
       <Divider />
@@ -187,20 +215,20 @@ export function Toolbar({ editor, onInsertTranscribersNote, onInsertPrintPageInd
         active={editor.isActive('blockquote')}
         title="Blockquote"
       >
-        ❝
+        <QuoteIcon size={16} />
       </ToolbarButton>
       <ToolbarButton
         onClick={() => editor.chain().focus().toggleCodeBlock().run()}
         active={editor.isActive('codeBlock')}
         title="Code block"
       >
-        {'</>'}
+        <Code2Icon size={16} />
       </ToolbarButton>
       <ToolbarButton
         onClick={() => editor.chain().focus().setHorizontalRule().run()}
         title="Horizontal rule"
       >
-        ―
+        <SeparatorHorizontalIcon size={16} />
       </ToolbarButton>
 
       <Divider />
@@ -211,13 +239,13 @@ export function Toolbar({ editor, onInsertTranscribersNote, onInsertPrintPageInd
         active={editor.isActive('transcribersNote')}
         title="Insert Transcriber's Note"
       >
-        <span className="text-xs">TN</span>
+        <MessageSquareTextIcon size={16} />
       </ToolbarButton>
       <ToolbarButton
         onClick={onInsertPrintPageIndicator}
         title="Insert Print Page Indicator"
       >
-        <span className="text-xs">p.</span>
+        <BookOpenIcon size={16} />
       </ToolbarButton>
     </div>
   )

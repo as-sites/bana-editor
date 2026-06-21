@@ -1,0 +1,80 @@
+[tools]
+node = "26"
+aube = "1.22.0"
+
+# this doesn't use the builtin aube provider because it doesn't allow overriding `sources`
+[deps.pnpm-custom]
+auto = true
+sources = [
+  "package.json",
+  "aube-lock.yaml",
+  "aube-workspace.yaml",
+]
+outputs = ["node_modules/"]
+description = "Install dependencies with aube"
+run = 'aube install'
+
+[hooks]
+postinstall = ['[ -n "$CI" ] || mise deps install']
+
+[shell_alias]
+mr = 'mise tasks run '
+mi = 'mise install '
+
+[env]
+_.path = ['node_modules/.bin']
+
+[settings]
+npm.package_manager = "aube"
+
+[tasks.dev]
+description = "Start the dev server"
+run = "vite"
+
+[tasks.build]
+description = "Build for production"
+run = "vite build"
+
+[tasks.preview]
+description = "Preview the production build"
+run = "vite preview"
+
+[tasks.unit]
+alias = ["test:unit", "test"]
+description = "Run Vitest for this workspace"
+usage = '''
+arg "[filters]" var=#true help="Test file filters"
+
+flag "-w --watch" negate="--no-watch" help="Re-run tests when files change" default="false"
+flag "--coverage" negate="--no-coverage" help="Collect coverage" default="false"
+flag "-p --project <name>" help="Vitest project to run" default="*"
+flag "-u --update" help="Update snapshots"
+flag "--ui" help="Enable Vitest UI"
+flag "--open" help="Open Vitest UI automatically"
+'''
+
+run = '''
+vitest run \
+  --root="." \
+  --config="vitest.config.ts" \
+  --project="{{usage.project}}" \
+  --coverage="{{usage.coverage}}" \
+  --watch="{{usage.watch}}" \
+  {% if usage.update %}--update {% endif %}\
+  {% if usage.ui %}--ui {% endif %}\
+  {% if usage.open %}--open {% endif %}\
+  {% for f in usage.filters %}{{f}} {% endfor %}
+'''
+
+
+[tasks.lint]
+description = "Lint the codebase"
+run = "oxlint ."
+
+[tasks.format]
+description = "Format the codebase"
+run = "oxfmt --write ."
+
+[tasks.typecheck]
+description = "Type-check without emitting"
+run = "tsc -b --noEmit"
